@@ -4,11 +4,11 @@ import ReduxContext from "../contexts/ReduxContext";
 
 export default function TodoList() {
   const store = useContext(ReduxContext);
-  const [todos, setTodos] = useState(store.getState());
+  const [todos, setTodos] = useState(store.getState().todos);
 
   useEffect(() => {
     const unsubscribe = store.subscribe(() => {
-      setTodos(store.getState());
+      setTodos(store.getState().todos);
     });
     return () => {
       unsubscribe();
