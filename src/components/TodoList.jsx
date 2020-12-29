@@ -1,26 +1,55 @@
-import React, { useContext, useEffect, useState } from "react";
-import { completeTodo } from "../actions";
-import ReduxContext from "../contexts/ReduxContext";
+// import React, { useContext, useEffect, useState } from "react";
+// import { completeTodo } from "../actions";
+// import ReduxContext from "../contexts/ReduxContext";
 
-export default function TodoList() {
-  const store = useContext(ReduxContext);
-  const [todos, setTodos] = useState(store.getState().todos);
+// export default function TodoList() {
+//   const store = useContext(ReduxContext);
+//   const [todos, setTodos] = useState(store.getState().todos);
 
-  useEffect(() => {
-    const unsubscribe = store.subscribe(() => {
-      setTodos(store.getState().todos);
-    });
-    return () => {
-      unsubscribe();
-    };
-  }, [store]);
+//   useEffect(() => {
+//     const unsubscribe = store.subscribe(() => {
+//       setTodos(store.getState().todos);
+//     });
+//     return () => {
+//       unsubscribe();
+//     };
+//   }, [store]);
 
+//   return (
+//     <div>
+//       <ul>
+//         {todos.map((todo, index) => {
+//           function click() {
+//             store.dispatch(completeTodo(index));
+//           }
+//           if (todo.done) {
+//             return (
+//               <li style={{ textDecoration: "line-through" }}>{todo.text}</li>
+//             );
+//           }
+//           return (
+//             <li>
+//               {todo.text} <button onClick={click}>done</button>
+//             </li>
+//           );
+//         })}
+//       </ul>
+//     </div>
+//   );
+// }
+
+import React from "react";
+import { connect } from "react-redux";
+// import { completeTodo } from "../actions";
+
+function TodoList() {
+  const todos = [];
   return (
     <div>
       <ul>
         {todos.map((todo, index) => {
           function click() {
-            store.dispatch(completeTodo(index));
+            // store.dispatch(completeTodo(index));
           }
           if (todo.done) {
             return (
@@ -37,3 +66,13 @@ export default function TodoList() {
     </div>
   );
 }
+
+const mapStateToProps = () => {};
+const mapDispatchToProps = () => {};
+
+const TodoListContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);
+
+export default TodoListContainer;
