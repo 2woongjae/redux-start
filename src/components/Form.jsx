@@ -1,10 +1,8 @@
-import React, { useContext, useRef } from "react";
-import { addTodo } from "../actions";
-import ReduxContext from "../contexts/ReduxContext";
+import React, { useRef } from "react";
 
-export default function Form() {
-  const store = useContext(ReduxContext);
-
+// 이런 멍청한 컴포넌트 같으니라구
+// Dumb Component, Presentational Component
+function Form({ add }) {
   const inputRef = useRef();
   return (
     <div>
@@ -15,7 +13,9 @@ export default function Form() {
 
   function click() {
     const todo = inputRef.current.value;
-    store.dispatch(addTodo(todo));
+    add(todo);
     inputRef.current.value = "";
   }
 }
+
+export default Form;
